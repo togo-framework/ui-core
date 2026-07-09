@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@import "../src/styles.css";
+@source "../src";
+
+/* The theme toggle drives background/foreground via design tokens. */
+body {
+  font-family: var(--tg-font);
+}

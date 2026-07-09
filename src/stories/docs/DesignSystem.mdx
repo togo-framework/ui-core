@@ -1,0 +1,59 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Design System/Tokens" />
+
+# Design tokens
+
+Every component reads **semantic CSS variables** (defined in `styles.css`), never raw
+colors. This is what makes theming global. The tokens are HSL-channel values exposed as
+Tailwind v4 color utilities.
+
+## Semantic colors
+
+{/* Rendered as a JSX table — Storybook MDX has no remark-gfm, so a markdown
+    `| … |` table would print as raw pipes. JSX always renders. */}
+
+<table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13.5, lineHeight: 1.5 }}>
+  <thead>
+    <tr style={{ borderBottom: '2px solid var(--border, #e5e7eb)', textAlign: 'left' }}>
+      <th style={{ padding: '8px 12px 8px 0' }}>Token</th>
+      <th style={{ padding: '8px 12px' }}>Utility</th>
+      <th style={{ padding: '8px 0' }}>Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    {[
+      [['--background', '--foreground'], ['bg-background', 'text-foreground'], 'page surface + text'],
+      [['--card', '--card-foreground'], ['bg-card'], 'raised surfaces (tables, panels)'],
+      [['--popover', '--popover-foreground'], ['bg-popover'], 'overlays (menus, dialogs)'],
+      [['--primary', '--primary-foreground'], ['bg-primary'], 'brand action color'],
+      [['--secondary', '--secondary-foreground'], ['bg-secondary'], 'secondary action'],
+      [['--muted', '--muted-foreground'], ['text-muted-foreground'], 'subdued text / fills'],
+      [['--accent', '--accent-foreground'], ['bg-accent'], 'hover / active fills'],
+      [['--destructive', '--destructive-foreground'], ['bg-destructive'], 'danger'],
+      [['--border', '--input', '--ring'], ['border-border', 'border-input', 'ring-ring'], 'lines + focus'],
+      [['--success', '--warning', '--info'], [], 'status'],
+      [['--sidebar-*'], [], 'sidebar surfaces'],
+    ].map((row, i) => (
+      <tr key={i} style={{ borderBottom: '1px solid var(--border, #eee)' }}>
+        <td style={{ padding: '7px 12px 7px 0', whiteSpace: 'nowrap' }}>{row[0].map((t, j) => <span key={j}>{j > 0 && ' / '}<code>{t}</code></span>)}</td>
+        <td style={{ padding: '7px 12px' }}>{row[1].length ? row[1].map((u, j) => <span key={j}>{j > 0 && ' / '}<code>{u}</code></span>) : '—'}</td>
+        <td style={{ padding: '7px 0' }}>{row[2]}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+## Radius & type
+
+- `--radius` drives `rounded-sm/md/lg`. Default `0.5rem`.
+- Font: **Sora** (`--togo-font-body`), Latin display + body, weights 300–800.
+
+## Rules for using the kit
+
+1. **Never hard-code colors** in app code that wraps these components — use the same
+   tokens (`bg-card`, `text-muted-foreground`, …) so your UI flips with the theme.
+2. The only "always-the-same" colors are intentional: modal **scrims** (`bg-black/80`) and
+   logo chips. Everything else is token-driven.
+
+Use the **Theme** and **Direction** toolbar switches above to see tokens respond.

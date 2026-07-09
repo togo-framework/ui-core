@@ -1,0 +1,46 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Design System/Translations" />
+
+# Translations (EN / AR)
+
+The kit is bilingual. There are two layers:
+
+## 1. Per-component `language` prop
+
+Components with built-in chrome accept `language="en" | "ar"`:
+
+```tsx
+<DataTable data={rows} columns={cols} language="ar" />
+<LoginForm language="ar" />
+```
+
+Their labels, placeholders, empty/loading states, and pagination strings switch to Arabic.
+
+## 2. App-wide `LanguageProvider`
+
+Wrap your app to share the active language + a translate helper:
+
+```tsx
+import { LanguageProvider, useT, useLanguage } from "@togo-framework/ui-core";
+
+<LanguageProvider initialLanguage="en">
+  <App />
+</LanguageProvider>
+
+// inside a component
+const t = useT();
+const { language, setLanguage } = useLanguage();
+<button onClick={() => setLanguage(language === "en" ? "ar" : "en")}>
+  {t("nav.profile")}
+</button>
+```
+
+Switching language usually pairs with switching `dir` (see **RTL**). The provider persists
+the choice (cookie `LANG_COOKIE_NAME`).
+
+## Adding strings
+
+App-level strings live in your own dictionary; the kit only owns component chrome. For
+content you render *into* components (column cells, button labels), translate in app code
+and pass the result in.

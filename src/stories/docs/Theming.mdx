@@ -1,0 +1,48 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Design System/Theming (multi-color)" />
+
+# Theming — multi-color brand
+
+The kit ships with the prism brand (a maroon `--primary`), but you can re-skin the entire
+UI to any brand color at runtime via `BrandingProvider` (or `applyBrand`). It writes brand
+CSS vars onto `document.documentElement`, and every `bg-primary`/`text-primary` component
+updates instantly.
+
+## With the provider
+
+```tsx
+import { BrandingProvider } from "@togo-framework/ui-core";
+
+<BrandingProvider
+  primaryHex="#7c3aed"     // your brand primary
+  accentHex="#06b6d4"      // accent
+  productName="Acme"
+  iconName="shield"
+>
+  <App />
+</BrandingProvider>
+```
+
+## Imperatively
+
+```tsx
+import { applyBrand, SENTRA_BRAND } from "@togo-framework/ui-core";
+
+useEffect(() => {
+  applyBrand(document.documentElement, { primaryHex: "#16a34a" });
+}, []);
+```
+
+## How it works
+
+- `applyBrand` converts your hex to HSL and sets `--primary` (and derived vars).
+- Because components use `bg-primary` / `text-primary-foreground`, they pick it up with no
+  re-render needed.
+- Static fallbacks live in `styles.css`, so the UI is themed even before the provider runs
+  (SSR-safe — `applyBrand` runs in `useEffect`).
+
+## Per-tenant theming
+
+Read a brand color from your org/tenant record and pass it to `BrandingProvider` — the same
+build serves every tenant in their own color.

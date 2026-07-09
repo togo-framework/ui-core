@@ -1,0 +1,42 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Design System/RTL" />
+
+# RTL (right-to-left)
+
+Components are built with **logical CSS properties** (`ps-*`/`pe-*`, `ms-*`/`me-*`,
+`start-*`/`end-*`, `text-start`/`text-end`) instead of physical `left`/`right`. Set the
+direction on a parent and the whole UI mirrors — spacing, icons, menus, tables, and the
+sidebar all flip.
+
+```tsx
+// app-wide
+document.documentElement.dir = "rtl";
+
+// or a subtree
+<div dir="rtl"><App /></div>
+```
+
+## Pair with language
+
+For Arabic, set both the direction and the component `language`:
+
+```tsx
+<div dir="rtl">
+  <DataTable data={rows} columns={cols} language="ar" />
+</div>
+```
+
+Components with internal chrome (DataTable, auth forms) translate their strings and flip
+sort icons / chevrons automatically when `language="ar"` and `dir="rtl"`.
+
+## Previewing here
+
+Use the **Direction** toolbar switch (`LTR` / `RTL (عربي)`) to mirror any story. The
+**Data → DataTable → Arabic RTL** story shows a fully mirrored, translated table.
+
+## Do / Don't
+
+- ✅ Use logical utilities in app code (`ms-2`, `pe-4`, `start-0`).
+- ❌ Avoid `ml-2` / `right-0` in wrappers around kit components — they won't mirror.
+- ✅ Set `dir` on a parent; don't set it per-component.

@@ -1,0 +1,33 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Design System/Mobile-first" />
+
+# Mobile-first & responsive
+
+Components are designed mobile-first and scale up with Tailwind breakpoints. Layout and
+overlay components adapt their presentation by screen size.
+
+## Preview at any size
+
+Use the **viewport** toolbar switch (top of the page) to preview any story at:
+
+- **Mobile** (375×812)
+- **Tablet** (768×1024)
+- **Laptop** (1280×800)
+- **Desktop** (1440×900)
+
+## Responsive behaviors built in
+
+- **Sidebar** collapses to an off-canvas **Sheet** on small screens (driven by a
+  `useIsMobile` breakpoint), with a `SidebarTrigger` to open it.
+- **Dialog / Sheet / Drawer** size to the viewport; `Drawer` is the touch-friendly
+  bottom-sheet variant for mobile.
+- **DataTable** scrolls horizontally on narrow screens and keeps its toolbar usable.
+- Typography and spacing use the token scale, so density stays comfortable on touch.
+
+## Guidance
+
+- Build app layouts mobile-first too: start single-column, add `md:`/`lg:` grid columns.
+- Prefer `Drawer` over `Dialog` for primary mobile flows.
+- Test both **Direction** (RTL) and **viewport** together — the sidebar flips side *and*
+  collapses correctly.

@@ -1,0 +1,38 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Design System/Dark & Light" />
+
+# Dark & Light mode
+
+The token set has a light `:root` and a `.dark` override. Mode is **class-based**: add or
+remove the `dark` class on `<html>`.
+
+```ts
+// toggle
+document.documentElement.classList.toggle("dark");
+
+// set explicitly
+document.documentElement.classList.toggle("dark", isDark);
+```
+
+In a togo app this is wired through the `ThemeProvider` in `web/components/providers.tsx`.
+
+## Important: portals
+
+Overlays (`Dialog`, `DropdownMenu`, `Popover`, `Sheet`, `Drawer`, `Tooltip`) render into a
+**portal** at `document.body` — outside your React tree. So the `dark` class must live on
+`<html>` (or `body`), **not** only on an inner wrapper, or portaled content won't be themed.
+That's exactly how the Storybook preview applies it (see the **Theme** toolbar switch).
+
+## Previewing here
+
+Use the **Theme** toolbar switch (top of the page) to flip any story between dark and light.
+Every component is verified in both — e.g. the **Data → DataTable** renders a dark card in
+dark mode and a white card in light mode, from the same `bg-card` token.
+
+## Do / Don't
+
+- ✅ Use `bg-background`, `bg-card`, `text-foreground`, `text-muted-foreground`.
+- ✅ Put `dark` on `<html>`.
+- ❌ Don't hard-code `bg-slate-900` / `text-white` in app wrappers — they won't flip.
+- ✅ Modal **scrims** (`bg-black/80`) are intentionally constant in both modes.

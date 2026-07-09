@@ -1,0 +1,60 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Getting Started/Installation" />
+
+# Installation
+
+## 1. Install
+
+```bash
+npm i @togo-framework/ui-core lucide-react
+# from a togo app, this is already wired by `togo new`
+```
+
+## 2. Import the stylesheet
+
+```ts
+// app/globals.css (or your root CSS)
+@import "tailwindcss";
+@import "@togo-framework/ui-core/styles.css";   /* tokens + @theme + Lusail font */
+@source "../node_modules/@togo-framework/ui-core/dist";  /* Tailwind v4: scan the kit for classes */
+```
+
+`styles.css` ships prism's design tokens (`:root` light + `.dark`) mapped into a Tailwind v4
+`@theme`, so utilities like `bg-background`, `text-muted-foreground`, `bg-primary`,
+`border-input`, `bg-card` resolve to the design system.
+
+## 3. Serve the Lusail font
+
+The package self-hosts the **Lusail** typeface (Arabic + Latin). Copy it into your served
+root so `@font-face` resolves:
+
+```bash
+cp -r node_modules/@togo-framework/ui-core/public/fonts/lusail public/fonts/lusail
+```
+
+(`togo new` apps do this automatically.)
+
+## 4. Wrap with providers (optional but recommended)
+
+```tsx
+"use client";
+import { BrandingProvider, LanguageProvider } from "@togo-framework/ui-core";
+
+export function Providers({ children }) {
+  return (
+    <BrandingProvider primaryHex="#7c3aed" accentHex="#06b6d4" productName="My App">
+      <LanguageProvider initialLanguage="en">{children}</LanguageProvider>
+    </BrandingProvider>
+  );
+}
+```
+
+- **Dark mode:** toggle `document.documentElement.classList.toggle("dark")`.
+- **RTL:** set `document.documentElement.dir = "rtl"` (or `dir="rtl"` on a subtree).
+
+## Peer dependencies
+
+`react >=18`, `react-dom >=18`, `lucide-react >=0.400`. The kit bundles Radix UI,
+TanStack Table, recharts, sonner, etc. as dependencies. If npm complains about React 19
+peers, add `legacy-peer-deps=true` to `.npmrc` (togo apps ship this).

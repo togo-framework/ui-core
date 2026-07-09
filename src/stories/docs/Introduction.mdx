@@ -1,0 +1,44 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Getting Started/Introduction" />
+
+# @togo-framework/ui-core
+
+The **togo UI kit** — a prism-derived component library for the togo framework.
+Framework-agnostic, **dark-first**, **RTL-ready**, **bilingual (EN/AR)**, **multi-theme**,
+and **mobile-first**. Every component is presentational: you pass data and callbacks.
+
+## Why this kit
+
+- **One design system.** All components read the same semantic tokens (`bg-background`,
+  `text-muted-foreground`, `bg-primary`, …), so theming is global and consistent.
+- **Dark & light.** Toggle a `.dark` class on `<html>` — every component flips. Use the
+  toolbar **Theme** switch (top of this page) to preview either mode.
+- **RTL.** Components use logical CSS (`ps/pe/ms/me/start/end`). Set `dir="rtl"` on a parent
+  and the whole UI mirrors. Use the toolbar **Direction** switch to preview.
+- **Translations.** Chrome strings are bilingual; components accept a `language` prop
+  (`'en' | 'ar'`) and there's a `LanguageProvider` for app-wide language.
+- **Multi-theme color.** `BrandingProvider` writes brand CSS vars at runtime, so you can
+  re-skin the whole kit to any primary/accent color.
+- **Mobile-first.** Layouts and overlays are responsive by default. Use the toolbar
+  **viewport** switch (Mobile / Tablet / Laptop / Desktop).
+
+## Install
+
+```bash
+npm i @togo-framework/ui-core lucide-react
+```
+
+```tsx
+import "@togo-framework/ui-core/styles.css";
+import { Button, Dialog, StatCard } from "@togo-framework/ui-core";
+```
+
+See **Getting Started → Installation** for Tailwind wiring and fonts, and
+**Design System** for tokens, theming, RTL, translations, and responsive guidance.
+
+## Navigating these docs
+
+- **Design System** — tokens, theming, dark/light, RTL, translations, mobile-first.
+- **Primitives / Forms / Overlays / Data / Charts / Layout / Auth / Status** — components,
+  each with an interactive **Docs** tab (props table + controls) and live stories.
