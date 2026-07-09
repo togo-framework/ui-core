@@ -56,7 +56,10 @@ export { pickLocalized } from "./lib/localized";
 export { timeAgoEN, timeAgoAR, timeAgo } from "./lib/time-ago-fn";
 
 // ── shared hooks ──
+// Note: hooks/use-toast's `toast`/`useToast` (shadcn Toaster) is intentionally
+// NOT re-exported here — it collides with sonner's `toast` from ./shadcn, which
+// is this package's canonical toast API (components/ui/toaster.tsx uses the
+// shadcn hook internally via a relative import; it isn't public API).
 export { useDebounce } from "./hooks/useDebounce";
 export { useInfiniteScroll } from "./hooks/useInfiniteScroll";
 export { useIsMobile } from "./hooks/use-mobile";
-export { useToast, toast } from "./hooks/use-toast";

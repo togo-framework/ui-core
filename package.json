@@ -1,6 +1,6 @@
 {
   "name": "@togo-framework/ui-core",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "togo UI kit — foundation package: shadcn/ui primitives, theme system, i18n, status/page chrome, and shared utils/hooks. Framework-agnostic, RTL-ready, dark-first. Install feature packages (@togo-framework/ui-auth, ui-admin, ui-data-table, …) on top of this.",
   "license": "MIT",
   "type": "module",
