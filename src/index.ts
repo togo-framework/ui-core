@@ -48,4 +48,15 @@ export type { LanguageContextValue, LanguageProviderProps } from "./i18n/Languag
 export * from "./components/brand";
 
 // ── utils ──
-export { cn } from "./lib/utils";
+export { cn, formatRelativeTime } from "./lib/utils";
+export { getEntityTypeLabel } from "./lib/entityTypeLabels";
+export { resolveEventBody } from "./lib/eventBody";
+export type { EventBodyResult } from "./lib/eventBody";
+export { pickLocalized } from "./lib/localized";
+export { timeAgoEN, timeAgoAR, timeAgo } from "./lib/time-ago-fn";
+
+// ── shared hooks ──
+export { useDebounce } from "./hooks/useDebounce";
+export { useInfiniteScroll } from "./hooks/useInfiniteScroll";
+export { useIsMobile } from "./hooks/use-mobile";
+export { useToast, toast } from "./hooks/use-toast";
