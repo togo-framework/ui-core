@@ -1,0 +1,10 @@
+'use client'
+
+import { cn } from "../../lib/utils";
+
+const Skeleton = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => {
+  return <div aria-hidden="true" className={cn("motion-safe:animate-pulse rounded-md bg-muted", className)} {...props} />;
+};
+Skeleton.displayName = "Skeleton";
+
+export { Skeleton };

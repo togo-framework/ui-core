@@ -1,0 +1,339 @@
+/*
+ * Sentra Design System — CSS Custom Properties (Design Tokens)
+ *
+ * Import this file in every product's global CSS:
+ *   @import '@prism/ui/styles/tokens.css';
+ *
+ * Then reference the tokens via Tailwind semantic classes:
+ *   bg-background, text-foreground, border-border, bg-primary, etc.
+ *
+ * The Lusail font (@font-face) is declared here. Products must serve the
+ * font files from their own /public/fonts/lusail/ directory, or remove the
+ * @font-face block and fall back to Inter/system-ui.
+ */
+
+/* ── Lusail Font Family (Arabic + Latin bilingual) ── */
+@font-face {
+  font-family: 'Lusail';
+  src: url('/fonts/lusail/Lusail-Light.woff2') format('woff2'),
+       url('/fonts/lusail/Lusail-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Lusail';
+  src: url('/fonts/lusail/Lusail-Regular.woff2') format('woff2'),
+       url('/fonts/lusail/Lusail-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Lusail';
+  src: url('/fonts/lusail/Lusail-Medium.woff2') format('woff2'),
+       url('/fonts/lusail/Lusail-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Lusail';
+  src: url('/fonts/lusail/Lusail-Bold.woff2') format('woff2'),
+       url('/fonts/lusail/Lusail-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Light Theme (default) ── */
+:root {
+  /* Typography */
+  --font-size-2xs: 0.6875rem;  /* 11px - badges only */
+  --font-size-xs: 0.8125rem;   /* 13px - minimum UI */
+  --font-size-sm: 0.875rem;    /* 14px - compact text */
+  --font-size-base: 0.9375rem; /* 15px - body text */
+  --font-size-lg: 1.0625rem;   /* 17px - important */
+  --line-height-tight: 1.4;
+  --line-height-base: 1.6;
+  --line-height-relaxed: 1.75;
+  --font-arabic: 'Lusail', sans-serif;
+
+  /* Brand */
+  --brand-primary: 345 75% 33%;
+  --brand-primary-glow: 345 75% 40%;
+
+  /* Semantic — light mode */
+  --background: 0 0% 98%;
+  --background-medium: 210 20% 96%;
+  --foreground: 210 20% 10%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 210 20% 10%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 210 20% 10%;
+
+  --primary: 345 75% 33%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 210 15% 93%;
+  --secondary-foreground: 210 20% 10%;
+
+  --muted: 210 15% 93%;
+  --muted-foreground: 215 20% 35%;
+
+  --accent: 210 15% 90%;
+  --accent-foreground: 210 20% 10%;
+  --accent-muted: 40 45% 45%;
+
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 210 15% 85%;
+  --input: 210 15% 85%;
+  --ring: 345 75% 33%;
+
+  --radius: 0.5rem;
+
+  /* ── Prism v2 — UX-polish layer (radii · elevation · motion · focus) ──
+   * Brand hues are unchanged. These tokens add the craft layer (consistent
+   * rounding, layered elevation, calibrated motion, visible focus) that makes
+   * every component feel premium. Theme-independent tokens (radius/motion/
+   * focus) live only here; shadows are re-tuned per theme in .dark. */
+
+  /* Radius scale derived from --radius for consistent rounding */
+  --radius-xs: calc(var(--radius) - 4px);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
+  --radius-2xl: calc(var(--radius) + 12px);
+
+  /* Elevation — soft, layered shadows tuned for light surfaces */
+  --shadow-xs: 0 1px 2px 0 hsl(215 25% 15% / 0.05);
+  --shadow-sm: 0 1px 3px 0 hsl(215 25% 15% / 0.08), 0 1px 2px -1px hsl(215 25% 15% / 0.08);
+  --shadow-md: 0 4px 12px -2px hsl(215 25% 15% / 0.10), 0 2px 6px -2px hsl(215 25% 15% / 0.08);
+  --shadow-lg: 0 12px 28px -6px hsl(215 25% 15% / 0.14), 0 6px 12px -6px hsl(215 25% 15% / 0.10);
+  --shadow-xl: 0 24px 48px -12px hsl(215 25% 15% / 0.20);
+  --shadow-brand: 0 8px 24px -8px hsl(var(--primary) / 0.35);
+
+  /* Motion — easing + duration tokens for consistent micro-interactions */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1.2);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+  --duration-slow: 280ms;
+
+  /* Focus ring */
+  --focus-ring: var(--ring);
+  --focus-ring-offset: var(--background);
+
+  /* Alerts & semantic signals */
+  --alert-amber: 40 65% 50%;
+  --alert-cyan: 174 62% 40%;
+  --success: 142 71% 40%;
+  --warning: 40 65% 50%;
+  --info: 174 62% 40%;
+  --event: 262 60% 55%;
+
+  /* Sidebar */
+  --sidebar-background: 0 0% 100%;
+  --sidebar-foreground: 215 15% 40%;
+  --sidebar-primary: 345 75% 33%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 210 15% 95%;
+  --sidebar-accent-foreground: 210 20% 10%;
+  --sidebar-border: 210 15% 90%;
+  --sidebar-ring: 345 75% 33%;
+
+  /* AI glow */
+  --ai-glow: 345 75% 33%;
+  --ai-pulse: 345 60% 50%;
+
+  /* Situation Room — light tactical */
+  --sr-navy: 222 47% 11%;
+  --sr-navy-deep: 222 50% 7%;
+  --sr-surface: 220 40% 13%;
+  --sr-border: 220 30% 20%;
+  --sr-gold: 45 93% 47%;
+  --sr-gold-muted: 45 60% 35%;
+  --sr-accent-text: 45 90% 40%;
+
+  /* War Room */
+  --warroom-bg: 210 20% 96%;
+  --warroom-card: 0 0% 100%;
+  --warroom-border: 210 15% 85%;
+  --warroom-land: 210 15% 92%;
+  --warroom-land-hover: 210 15% 88%;
+
+  /* Landing gradient */
+  --landing-gradient-hero:
+    radial-gradient(ellipse at 50% 0%, hsl(var(--primary) / 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 0% 50%, hsl(var(--primary) / 0.04) 0%, transparent 40%),
+    radial-gradient(ellipse at 100% 80%, hsl(var(--muted-foreground) / 0.03) 0%, transparent 40%);
+
+  /* Personalize / AI palette */
+  --pz-primary:    170 72% 36%;
+  --pz-secondary:  145 68% 49%;
+  --pz-ai:         251 68% 67%;
+  --pz-ai-foreground: 0 0% 100%;
+  --pz-gradient-hero:
+    radial-gradient(ellipse at 50% 0%,   hsl(251 68% 67% / 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 0% 50%,   hsl(170 72% 36% / 0.06) 0%, transparent 40%),
+    radial-gradient(ellipse at 100% 80%, hsl(145 68% 49% / 0.05) 0%, transparent 40%);
+  --pz-shadow-glow:         0 0 30px hsl(170 72% 36% / 0.15);
+  --pz-shadow-glow-intense: 0 0 50px hsl(170 72% 36% / 0.28), 0 0 80px hsl(170 72% 36% / 0.12);
+}
+
+/* ── Dark Theme ── */
+.dark {
+  --brand-primary: 345 75% 33%;
+  --brand-primary-glow: 345 75% 40%;
+
+  --background: 210 20% 6%;
+  --background-medium: 215 18% 11%;
+  --foreground: 210 20% 98%;
+
+  --card: 215 18% 11%;
+  --card-foreground: 210 20% 98%;
+
+  --popover: 215 18% 13%;
+  --popover-foreground: 210 20% 98%;
+
+  --primary: 345 75% 33%;
+  --primary-foreground: 210 20% 98%;
+
+  --secondary: 215 15% 18%;
+  --secondary-foreground: 210 20% 98%;
+
+  --muted: 215 15% 18%;
+  --muted-foreground: 215 15% 68%;
+
+  --accent: 215 15% 22%;
+  --accent-foreground: 210 20% 98%;
+  --accent-muted: 40 45% 45%;
+
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 210 20% 98%;
+
+  --border: 215 15% 20%;
+  --input: 215 15% 20%;
+  --ring: 345 75% 33%;
+
+  --radius: 0.5rem;
+
+  /* Prism v2 polish — dark elevation (deeper, blacker shadows so cards lift
+   * off the dark background). Radius/motion/focus tokens inherit from :root. */
+  --shadow-xs: 0 1px 2px 0 hsl(0 0% 0% / 0.30);
+  --shadow-sm: 0 1px 3px 0 hsl(0 0% 0% / 0.40), 0 1px 2px -1px hsl(0 0% 0% / 0.40);
+  --shadow-md: 0 4px 12px -2px hsl(0 0% 0% / 0.45), 0 2px 6px -2px hsl(0 0% 0% / 0.40);
+  --shadow-lg: 0 12px 28px -6px hsl(0 0% 0% / 0.55), 0 6px 12px -6px hsl(0 0% 0% / 0.45);
+  --shadow-xl: 0 24px 48px -12px hsl(0 0% 0% / 0.65);
+  --shadow-brand: 0 8px 24px -8px hsl(var(--primary) / 0.50);
+
+  --alert-amber: 40 65% 58%;
+  --alert-cyan: 174 62% 47%;
+  --success: 142 71% 45%;
+  --warning: 40 65% 58%;
+  --info: 174 62% 47%;
+  --event: 262 60% 62%;
+
+  --sidebar-background: 215 18% 8%;
+  --sidebar-foreground: 215 15% 75%;
+  --sidebar-primary: 345 75% 33%;
+  --sidebar-primary-foreground: 210 20% 98%;
+  --sidebar-accent: 215 15% 14%;
+  --sidebar-accent-foreground: 210 20% 98%;
+  --sidebar-border: 215 15% 16%;
+  --sidebar-ring: 345 75% 33%;
+
+  --ai-glow: 345 75% 33%;
+  --ai-pulse: 345 60% 50%;
+
+  --sr-navy: 222 47% 11%;
+  --sr-navy-deep: 222 50% 7%;
+  --sr-surface: 220 40% 13%;
+  --sr-border: 220 30% 20%;
+  --sr-gold: 45 93% 47%;
+  --sr-gold-muted: 45 60% 35%;
+  --sr-accent-text: 45 90% 65%;
+
+  --warroom-bg: var(--sr-navy-deep);
+  --warroom-card: var(--sr-surface);
+  --warroom-border: var(--sr-border);
+  --warroom-land: 215 18% 12%;
+  --warroom-land-hover: 215 18% 16%;
+
+  --pz-gradient-hero:
+    radial-gradient(ellipse at 50% 0%,   hsl(251 68% 67% / 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse at 0% 50%,   hsl(170 72% 36% / 0.10) 0%, transparent 45%),
+    radial-gradient(ellipse at 100% 80%, hsl(145 68% 49% / 0.08) 0%, transparent 40%);
+  --pz-shadow-glow:         0 0 30px hsl(170 72% 36% / 0.25);
+  --pz-shadow-glow-intense: 0 0 50px hsl(170 72% 36% / 0.40), 0 0 80px hsl(170 72% 36% / 0.20);
+}
+
+/* ── Global resets (apply via @layer base in product globals.css) ── */
+/* Products should add this in their own globals.css:
+ *
+ *   @layer base {
+ *     * { @apply border-border; }
+ *     body {
+ *       @apply bg-background text-foreground antialiased;
+ *       font-family: 'Lusail', 'Inter', system-ui, sans-serif;
+ *       font-size: var(--font-size-base);
+ *       line-height: var(--line-height-base);
+ *       letter-spacing: 0.01em;
+ *     }
+ *     [dir="rtl"] body { font-family: var(--font-arabic), system-ui, sans-serif; }
+ *   }
+ */
+
+/* ── RTL utilities (include in product @layer utilities) ── */
+/* [dir="rtl"] .rtl-flip { transform: scaleX(-1); }
+ * [dir="rtl"] .space-x-1 > :not([hidden]) ~ :not([hidden]),
+ * [dir="rtl"] .space-x-2 > :not([hidden]) ~ :not([hidden]),
+ * [dir="rtl"] .space-x-3 > :not([hidden]) ~ :not([hidden]),
+ * [dir="rtl"] .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+ *   --tw-space-x-reverse: 1;
+ * }
+ */
+
+/* ── Tailwind v4 theme: expose tokens as color utilities (bg-background, text-muted-foreground, border-input…) ── */
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-success: hsl(var(--success));
+  --color-warning: hsl(var(--warning));
+  --color-info: hsl(var(--info));
+  --color-sidebar-background: hsl(var(--sidebar-background));
+  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+  --color-sidebar-primary: hsl(var(--sidebar-primary));
+  --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
+  --color-sidebar-accent: hsl(var(--sidebar-accent));
+  --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
+  --color-sidebar-border: hsl(var(--sidebar-border));
+  --color-sidebar-ring: hsl(var(--sidebar-ring));
+  --radius-lg: var(--radius, 0.5rem);
+  --radius-md: calc(var(--radius, 0.5rem) - 2px);
+  --radius-sm: calc(var(--radius, 0.5rem) - 4px);
+}

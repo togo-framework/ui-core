@@ -1,0 +1,63 @@
+/*
+ * ToGO Design System — PRIMITIVE tokens.
+ *
+ * The raw brand palette + non-color scales. This is the ONLY file in the kit
+ * allowed to contain literal hex values (enforced by the lint guardrail).
+ * Semantic role tokens (tokens.semantic.css) reference these; components
+ * reference the semantic roles — never these primitives directly.
+ *
+ * Palette source: the official ToGO brand guidelines (Gopher Cyan → Cobalt).
+ */
+
+:root {
+  /* ── Brand ramp — Gopher Cyan → Stack Sky → Cobalt ── */
+  --togo-cyan-300:   #5CDDEC;
+  --togo-cyan-400:   #2FCFE2;
+  --togo-cyan-500:   #1FC7DC;  /* Gopher Cyan — primary accent */
+  --togo-sky-500:    #2D8CE6;  /* Stack Sky — secondary */
+  --togo-cobalt-500: #1659C8;  /* Cobalt — deep */
+  --togo-cobalt-600: #1247A3;
+
+  /* ── Neutrals ── */
+  --togo-ink-900:   #141A1D;   /* Ink — text / dark surfaces */
+  --togo-ink-700:   #2A363B;
+  --togo-slate-500: #5A6B72;   /* Slate — muted body */
+  --togo-slate-300: #9BAAB0;
+  --togo-line-200:  #E8EDEF;   /* hairline borders (light) */
+  --togo-mist-100:  #F4F7F8;   /* Mist — surfaces (light) */
+  --togo-white:     #FFFFFF;
+
+  /* ── Status ── */
+  --togo-success-500: #1F9D6B;
+  --togo-warn-500:    #E0A11B;
+  --togo-danger-500:  #D85563;
+
+  /* ── Brand gradient (ToGO Flow) ── */
+  --togo-flow: linear-gradient(110deg, var(--togo-cyan-500) 0%, var(--togo-sky-500) 52%, var(--togo-cobalt-500) 100%);
+
+  /* ── Non-color scales ── */
+  --togo-radius-sm: 6px;
+  --togo-radius-md: 12px;
+  --togo-radius-lg: 16px;
+  --togo-radius-pill: 999px;
+
+  --togo-space-1: 4px;
+  --togo-space-2: 8px;
+  --togo-space-3: 12px;
+  --togo-space-4: 16px;
+  --togo-space-6: 24px;
+  --togo-space-8: 32px;
+
+  --togo-shadow-sm: 0 1px 2px rgba(20, 26, 29, .06);
+  --togo-shadow-md: 0 8px 24px rgba(20, 26, 29, .10);
+  --togo-shadow-accent: 0 12px 24px rgba(22, 89, 200, .25);
+
+  /* ── Type families ──
+   * Latin display/body/mono. Lusail is the ARABIC face and is applied ONLY to
+   * RTL/Arabic content (see the [dir="rtl"], :lang(ar) rule in styles.css) — it is
+   * intentionally NOT in these Latin stacks, so if the brand fonts fail to load the
+   * fallback is clean system-ui, never Lusail rendering Latin (which looks heavy/wrong). */
+  --togo-font-display: "Sora", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --togo-font-body:    "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --togo-font-mono:    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}

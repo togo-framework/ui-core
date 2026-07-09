@@ -1,0 +1,147 @@
+/*
+ * ToGO Design System — SEMANTIC role tokens.
+ *
+ * The roles components actually consume. Each theme is a `[data-theme="…"]`
+ * block that re-points the same roles — this is the runtime-theming switch
+ * surface. Add a tenant/brand theme by adding one more block here; no
+ * component changes required.
+ *
+ * No hex lives here — every value references a primitive (tokens.primitive.css).
+ */
+
+/* ── DARK (default) ── */
+:root,
+[data-theme="dark"] {
+  --togo-color-bg:            var(--togo-ink-900);
+  --togo-color-surface:       #1B2226;
+  --togo-color-surface-alt:   #222B30;
+  --togo-color-border:        #2C383E;
+  --togo-color-text:          #E8EEF0;
+  --togo-color-text-muted:    var(--togo-slate-300);
+  --togo-color-accent:        var(--togo-cyan-500);
+  --togo-color-accent-strong: var(--togo-sky-500);
+  --togo-color-on-accent:     var(--togo-ink-900);
+  --togo-color-focus-ring:    var(--togo-cyan-400);
+  --togo-color-success:       var(--togo-success-500);
+  --togo-color-warn:          var(--togo-warn-500);
+  --togo-color-danger:        var(--togo-danger-500);
+}
+
+/* ── LIGHT ── */
+[data-theme="light"] {
+  --togo-color-bg:            var(--togo-mist-100);
+  --togo-color-surface:       var(--togo-white);
+  --togo-color-surface-alt:   var(--togo-mist-100);
+  --togo-color-border:        var(--togo-line-200);
+  --togo-color-text:          var(--togo-ink-900);
+  --togo-color-text-muted:    var(--togo-slate-500);
+  --togo-color-accent:        var(--togo-cobalt-500);
+  --togo-color-accent-strong: var(--togo-sky-500);
+  --togo-color-on-accent:     var(--togo-white);
+  --togo-color-focus-ring:    var(--togo-sky-500);
+  --togo-color-success:       var(--togo-success-500);
+  --togo-color-warn:          var(--togo-warn-500);
+  --togo-color-danger:        var(--togo-danger-500);
+}
+
+/* ── PURPLE (dark accent) ── */
+[data-theme="purple"] {
+  --togo-color-bg:            #16101E;
+  --togo-color-surface:       #1D1528;
+  --togo-color-surface-alt:   #241B30;
+  --togo-color-border:        #342549;
+  --togo-color-text:          #EDE9F7;
+  --togo-color-text-muted:    #9D8FC4;
+  --togo-color-accent:        #9B6DF5;
+  --togo-color-accent-strong: #B38EFF;
+  --togo-color-on-accent:     #FFFFFF;
+  --togo-color-focus-ring:    #9B6DF5;
+  --togo-color-success:       var(--togo-success-500);
+  --togo-color-warn:          var(--togo-warn-500);
+  --togo-color-danger:        var(--togo-danger-500);
+}
+
+/* ── ROSE (dark accent) ── */
+[data-theme="rose"] {
+  --togo-color-bg:            #1E1015;
+  --togo-color-surface:       #271620;
+  --togo-color-surface-alt:   #2F1C28;
+  --togo-color-border:        #4A2236;
+  --togo-color-text:          #F7E9EC;
+  --togo-color-text-muted:    #C48FA0;
+  --togo-color-accent:        #F5427B;
+  --togo-color-accent-strong: #FF6A9B;
+  --togo-color-on-accent:     #FFFFFF;
+  --togo-color-focus-ring:    #F5427B;
+  --togo-color-success:       var(--togo-success-500);
+  --togo-color-warn:          var(--togo-warn-500);
+  --togo-color-danger:        #E05565;
+}
+
+/* ── EMERALD (dark accent) ── */
+[data-theme="emerald"] {
+  --togo-color-bg:            #0E1A17;
+  --togo-color-surface:       #142119;
+  --togo-color-surface-alt:   #1A2B23;
+  --togo-color-border:        #243D30;
+  --togo-color-text:          #E8F4F0;
+  --togo-color-text-muted:    #8AB5A2;
+  --togo-color-accent:        #10B981;
+  --togo-color-accent-strong: #34D399;
+  --togo-color-on-accent:     #0E1A17;
+  --togo-color-focus-ring:    #10B981;
+  --togo-color-success:       #10B981;
+  --togo-color-warn:          var(--togo-warn-500);
+  --togo-color-danger:        var(--togo-danger-500);
+}
+
+/* ── PURPLE LIGHT ── */
+[data-theme="purple-light"] {
+  --togo-color-bg:            #FAF9FF;
+  --togo-color-surface:       #FFFFFF;
+  --togo-color-surface-alt:   #F3F0FE;
+  --togo-color-border:        #DDD6FE;
+  --togo-color-text:          #2E1A5C;
+  --togo-color-text-muted:    #6D5FA0;
+  --togo-color-accent:        #7C3AED;
+  --togo-color-accent-strong: #6D28D9;
+  --togo-color-on-accent:     #FFFFFF;
+  --togo-color-focus-ring:    #7C3AED;
+  --togo-color-success:       var(--togo-success-500);
+  --togo-color-warn:          var(--togo-warn-500);
+  --togo-color-danger:        var(--togo-danger-500);
+}
+
+/* ── ROSE LIGHT ── */
+[data-theme="rose-light"] {
+  --togo-color-bg:            #FFF8F9;
+  --togo-color-surface:       #FFFFFF;
+  --togo-color-surface-alt:   #FEF0F3;
+  --togo-color-border:        #FECDD3;
+  --togo-color-text:          #4C0519;
+  --togo-color-text-muted:    #9F4060;
+  --togo-color-accent:        #E11D48;
+  --togo-color-accent-strong: #BE123C;
+  --togo-color-on-accent:     #FFFFFF;
+  --togo-color-focus-ring:    #E11D48;
+  --togo-color-success:       var(--togo-success-500);
+  --togo-color-warn:          var(--togo-warn-500);
+  --togo-color-danger:        #E11D48;
+}
+
+/* ── EMERALD LIGHT ── */
+[data-theme="emerald-light"] {
+  --togo-color-bg:            #F0FDF4;
+  --togo-color-surface:       #FFFFFF;
+  --togo-color-surface-alt:   #DCFCE7;
+  --togo-color-border:        #BBF7D0;
+  --togo-color-text:          #052E16;
+  --togo-color-text-muted:    #166534;
+  --togo-color-accent:        #059669;
+  --togo-color-accent-strong: #047857;
+  --togo-color-on-accent:     #FFFFFF;
+  --togo-color-focus-ring:    #059669;
+  --togo-color-success:       #059669;
+  --togo-color-warn:          var(--togo-warn-500);
+  --togo-color-danger:        var(--togo-danger-500);
+}

@@ -1,0 +1,757 @@
+/*
+ * Sentra Design System — CSS Custom Properties (Design Tokens)
+ *
+ * Import this file in every product's global CSS:
+ *   @import '@prism/ui/styles/tokens.css';
+ *
+ * Then reference the tokens via Tailwind semantic classes:
+ *   bg-background, text-foreground, border-border, bg-primary, etc.
+ *
+ * The Lusail font (@font-face) is declared here. Products must serve the
+ * font files from their own /public/fonts/lusail/ directory, or remove the
+ * @font-face block and fall back to Inter/system-ui.
+ */
+
+/* Enter/exit animation utilities (animate-in/out, fade/zoom/slide) used by the
+ * overlay components (Dialog, DropdownMenu, Sheet, Popover, Tooltip, Accordion). */
+@import "tw-animate-css";
+
+/* ToGO token layers — primitive palette + semantic roles (the --togo-* contract).
+ * The existing HSL tokens below are remapped onto this palette so the whole kit
+ * re-skins to the ToGO brand; the --togo-color-* roles add the runtime-theming
+ * surface that ThemeProvider switches via [data-theme]. */
+@import "./theme/tokens.primitive.css";
+@import "./theme/tokens.semantic.css";
+
+/* Class-based dark mode: `dark:` utilities follow the `.dark` class (toggled on
+ * <html>), NOT the OS prefers-color-scheme. Without this, components using
+ * `dark:` variants render their dark styles whenever the OS is dark — even in
+ * light mode — causing low-contrast text. This keeps `dark:` in sync with the
+ * token theming (which is also `.dark`-driven). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ── Lusail Font Family (Arabic + Latin bilingual) ── */
+@font-face {
+  font-family: 'Lusail';
+  src: url('/fonts/lusail/Lusail-Light.woff2') format('woff2'),
+       url('/fonts/lusail/Lusail-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Lusail';
+  src: url('/fonts/lusail/Lusail-Regular.woff2') format('woff2'),
+       url('/fonts/lusail/Lusail-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Lusail';
+  src: url('/fonts/lusail/Lusail-Medium.woff2') format('woff2'),
+       url('/fonts/lusail/Lusail-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Lusail';
+  src: url('/fonts/lusail/Lusail-Bold.woff2') format('woff2'),
+       url('/fonts/lusail/Lusail-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Light Theme (default) ── */
+:root {
+  /* Typography */
+  --font-size-2xs: 0.6875rem;  /* 11px - badges only */
+  --font-size-xs: 0.8125rem;   /* 13px - minimum UI */
+  --font-size-sm: 0.875rem;    /* 14px - compact text */
+  --font-size-base: 0.9375rem; /* 15px - body text */
+  --font-size-lg: 1.0625rem;   /* 17px - important */
+  --line-height-tight: 1.4;
+  --line-height-base: 1.6;
+  --line-height-relaxed: 1.75;
+  --font-arabic: 'Lusail', sans-serif;
+
+  /* Brand */
+  --brand-primary: 345 75% 33%;
+  --brand-primary-glow: 345 75% 40%;
+
+  /* Semantic — light mode */
+  --background: 0 0% 98%;
+  --background-medium: 210 20% 96%;
+  --foreground: 210 20% 10%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 210 20% 10%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 210 20% 10%;
+
+  --primary: 345 75% 33%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 210 15% 93%;
+  --secondary-foreground: 210 20% 10%;
+
+  --muted: 210 15% 93%;
+  --muted-foreground: 215 20% 35%;
+
+  --accent: 210 15% 90%;
+  --accent-foreground: 210 20% 10%;
+  --accent-muted: 40 45% 45%;
+
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 210 15% 85%;
+  --input: 210 15% 85%;
+  --ring: 345 75% 33%;
+
+  --radius: 0.5rem;
+
+  /* ── Prism v2 — UX-polish layer (radii · elevation · motion · focus) ──
+   * Brand hues are unchanged. These tokens add the craft layer (consistent
+   * rounding, layered elevation, calibrated motion, visible focus) that makes
+   * every component feel premium. Theme-independent tokens (radius/motion/
+   * focus) live only here; shadows are re-tuned per theme in .dark. */
+
+  /* Radius scale derived from --radius for consistent rounding */
+  --radius-xs: calc(var(--radius) - 4px);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
+  --radius-2xl: calc(var(--radius) + 12px);
+
+  /* Elevation — soft, layered shadows tuned for light surfaces */
+  --shadow-xs: 0 1px 2px 0 hsl(215 25% 15% / 0.05);
+  --shadow-sm: 0 1px 3px 0 hsl(215 25% 15% / 0.08), 0 1px 2px -1px hsl(215 25% 15% / 0.08);
+  --shadow-md: 0 4px 12px -2px hsl(215 25% 15% / 0.10), 0 2px 6px -2px hsl(215 25% 15% / 0.08);
+  --shadow-lg: 0 12px 28px -6px hsl(215 25% 15% / 0.14), 0 6px 12px -6px hsl(215 25% 15% / 0.10);
+  --shadow-xl: 0 24px 48px -12px hsl(215 25% 15% / 0.20);
+  --shadow-brand: 0 8px 24px -8px hsl(var(--primary) / 0.35);
+
+  /* Motion — easing + duration tokens for consistent micro-interactions */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1.2);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+  --duration-slow: 280ms;
+
+  /* Focus ring */
+  --focus-ring: var(--ring);
+  --focus-ring-offset: var(--background);
+
+  /* Alerts & semantic signals */
+  --alert-amber: 40 65% 50%;
+  --alert-cyan: 174 62% 40%;
+  --success: 142 71% 40%;
+  --warning: 40 65% 50%;
+  --info: 174 62% 40%;
+  --event: 262 60% 55%;
+
+  /* Sidebar */
+  --sidebar-background: 0 0% 100%;
+  --sidebar-foreground: 215 15% 40%;
+  --sidebar-primary: 345 75% 33%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 210 15% 95%;
+  --sidebar-accent-foreground: 210 20% 10%;
+  --sidebar-border: 210 15% 90%;
+  --sidebar-ring: 345 75% 33%;
+
+  /* AI glow */
+  --ai-glow: 345 75% 33%;
+  --ai-pulse: 345 60% 50%;
+
+  /* Situation Room — light tactical */
+  --sr-navy: 222 47% 11%;
+  --sr-navy-deep: 222 50% 7%;
+  --sr-surface: 220 40% 13%;
+  --sr-border: 220 30% 20%;
+  --sr-gold: 45 93% 47%;
+  --sr-gold-muted: 45 60% 35%;
+  --sr-accent-text: 45 90% 40%;
+
+  /* War Room */
+  --warroom-bg: 210 20% 96%;
+  --warroom-card: 0 0% 100%;
+  --warroom-border: 210 15% 85%;
+  --warroom-land: 210 15% 92%;
+  --warroom-land-hover: 210 15% 88%;
+
+  /* Landing gradient */
+  --landing-gradient-hero:
+    radial-gradient(ellipse at 50% 0%, hsl(var(--primary) / 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 0% 50%, hsl(var(--primary) / 0.04) 0%, transparent 40%),
+    radial-gradient(ellipse at 100% 80%, hsl(var(--muted-foreground) / 0.03) 0%, transparent 40%);
+
+  /* Personalize / AI palette */
+  --pz-primary:    170 72% 36%;
+  --pz-secondary:  145 68% 49%;
+  --pz-ai:         251 68% 67%;
+  --pz-ai-foreground: 0 0% 100%;
+  --pz-gradient-hero:
+    radial-gradient(ellipse at 50% 0%,   hsl(251 68% 67% / 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 0% 50%,   hsl(170 72% 36% / 0.06) 0%, transparent 40%),
+    radial-gradient(ellipse at 100% 80%, hsl(145 68% 49% / 0.05) 0%, transparent 40%);
+  --pz-shadow-glow:         0 0 30px hsl(170 72% 36% / 0.15);
+  --pz-shadow-glow-intense: 0 0 50px hsl(170 72% 36% / 0.28), 0 0 80px hsl(170 72% 36% / 0.12);
+}
+
+/* ── Dark Theme ── */
+.dark {
+  --brand-primary: 345 75% 33%;
+  --brand-primary-glow: 345 75% 40%;
+
+  --background: 210 20% 6%;
+  --background-medium: 215 18% 11%;
+  --foreground: 210 20% 98%;
+
+  --card: 215 18% 11%;
+  --card-foreground: 210 20% 98%;
+
+  --popover: 215 18% 13%;
+  --popover-foreground: 210 20% 98%;
+
+  --primary: 345 75% 33%;
+  --primary-foreground: 210 20% 98%;
+
+  --secondary: 215 15% 18%;
+  --secondary-foreground: 210 20% 98%;
+
+  --muted: 215 15% 18%;
+  --muted-foreground: 215 15% 68%;
+
+  --accent: 215 15% 22%;
+  --accent-foreground: 210 20% 98%;
+  --accent-muted: 40 45% 45%;
+
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 210 20% 98%;
+
+  --border: 215 15% 20%;
+  --input: 215 15% 20%;
+  --ring: 345 75% 33%;
+
+  --radius: 0.5rem;
+
+  /* Prism v2 polish — dark elevation (deeper, blacker shadows so cards lift
+   * off the dark background). Radius/motion/focus tokens inherit from :root. */
+  --shadow-xs: 0 1px 2px 0 hsl(0 0% 0% / 0.30);
+  --shadow-sm: 0 1px 3px 0 hsl(0 0% 0% / 0.40), 0 1px 2px -1px hsl(0 0% 0% / 0.40);
+  --shadow-md: 0 4px 12px -2px hsl(0 0% 0% / 0.45), 0 2px 6px -2px hsl(0 0% 0% / 0.40);
+  --shadow-lg: 0 12px 28px -6px hsl(0 0% 0% / 0.55), 0 6px 12px -6px hsl(0 0% 0% / 0.45);
+  --shadow-xl: 0 24px 48px -12px hsl(0 0% 0% / 0.65);
+  --shadow-brand: 0 8px 24px -8px hsl(var(--primary) / 0.50);
+
+  --alert-amber: 40 65% 58%;
+  --alert-cyan: 174 62% 47%;
+  --success: 142 71% 45%;
+  --warning: 40 65% 58%;
+  --info: 174 62% 47%;
+  --event: 262 60% 62%;
+
+  --sidebar-background: 215 18% 8%;
+  --sidebar-foreground: 215 15% 75%;
+  --sidebar-primary: 345 75% 33%;
+  --sidebar-primary-foreground: 210 20% 98%;
+  --sidebar-accent: 215 15% 14%;
+  --sidebar-accent-foreground: 210 20% 98%;
+  --sidebar-border: 215 15% 16%;
+  --sidebar-ring: 345 75% 33%;
+
+  --ai-glow: 345 75% 33%;
+  --ai-pulse: 345 60% 50%;
+
+  --sr-navy: 222 47% 11%;
+  --sr-navy-deep: 222 50% 7%;
+  --sr-surface: 220 40% 13%;
+  --sr-border: 220 30% 20%;
+  --sr-gold: 45 93% 47%;
+  --sr-gold-muted: 45 60% 35%;
+  --sr-accent-text: 45 90% 65%;
+
+  --warroom-bg: var(--sr-navy-deep);
+  --warroom-card: var(--sr-surface);
+  --warroom-border: var(--sr-border);
+  --warroom-land: 215 18% 12%;
+  --warroom-land-hover: 215 18% 16%;
+
+  --pz-gradient-hero:
+    radial-gradient(ellipse at 50% 0%,   hsl(251 68% 67% / 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse at 0% 50%,   hsl(170 72% 36% / 0.10) 0%, transparent 45%),
+    radial-gradient(ellipse at 100% 80%, hsl(145 68% 49% / 0.08) 0%, transparent 40%);
+  --pz-shadow-glow:         0 0 30px hsl(170 72% 36% / 0.25);
+  --pz-shadow-glow-intense: 0 0 50px hsl(170 72% 36% / 0.40), 0 0 80px hsl(170 72% 36% / 0.20);
+}
+
+/* ── Global resets ──
+ * Tailwind v4 changed the default border/ring color to `currentColor`, so any
+ * component using a bare `border` would render a black/foreground-colored outline
+ * (especially visible in light mode). Default the border + ring + placeholder to
+ * the design tokens so every component is correct without the consumer adding it. */
+@layer base {
+  *, ::before, ::after {
+    border-color: hsl(var(--border));
+  }
+  * {
+    outline-color: hsl(var(--ring) / 0.5);
+  }
+  ::placeholder {
+    color: hsl(var(--muted-foreground));
+  }
+}
+
+/* ── RTL utilities (include in product @layer utilities) ── */
+/* [dir="rtl"] .rtl-flip { transform: scaleX(-1); }
+ * [dir="rtl"] .space-x-1 > :not([hidden]) ~ :not([hidden]),
+ * [dir="rtl"] .space-x-2 > :not([hidden]) ~ :not([hidden]),
+ * [dir="rtl"] .space-x-3 > :not([hidden]) ~ :not([hidden]),
+ * [dir="rtl"] .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+ *   --tw-space-x-reverse: 1;
+ * }
+ */
+
+/* ── Tailwind v4 theme: expose tokens as color utilities (bg-background, text-muted-foreground, border-input…) ── */
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-success: hsl(var(--success));
+  --color-warning: hsl(var(--warning));
+  --color-info: hsl(var(--info));
+  --color-sidebar-background: hsl(var(--sidebar-background));
+  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+  --color-sidebar-primary: hsl(var(--sidebar-primary));
+  --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
+  --color-sidebar-accent: hsl(var(--sidebar-accent));
+  --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
+  --color-sidebar-border: hsl(var(--sidebar-border));
+  --color-sidebar-ring: hsl(var(--sidebar-ring));
+
+  /* prism color "sets" — brand / gold / ai / alert / extras */
+  --color-background-medium: hsl(var(--background-medium));
+  --color-brand: hsl(var(--brand-primary));
+  --color-brand-glow: hsl(var(--brand-primary-glow));
+  --color-gold: hsl(var(--accent));
+  --color-gold-muted: hsl(var(--accent-muted));
+  --color-ai: hsl(var(--pz-ai, 251 68% 67%));
+  --color-ai-foreground: hsl(var(--pz-ai-foreground, 0 0% 100%));
+  --color-alert-amber: hsl(var(--alert-amber));
+  --color-alert-cyan: hsl(var(--alert-cyan));
+
+  /* radius scale */
+  --radius-lg: var(--radius, 0.5rem);
+  --radius-md: calc(var(--radius, 0.5rem) - 2px);
+  --radius-sm: calc(var(--radius, 0.5rem) - 4px);
+
+  /* prism type scale */
+  --text-2xs: 0.6875rem;
+  --text-xs: 0.8125rem;
+  --text-sm: 0.875rem;
+  --text-base: 0.9375rem;
+  --text-lg: 1.0625rem;
+
+  /* breakpoints (mobile-first; xs = 375) */
+  --breakpoint-xs: 375px;
+
+  /* animations */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-breathing: breathing 3s ease-in-out infinite;
+  --animate-pulse-brand: pulse-brand 2s ease-in-out infinite;
+  --animate-ai-pulse: ai-pulse 1.5s ease-in-out infinite;
+}
+
+/* keyframes referenced by the animation utilities above */
+@keyframes accordion-down { from { height: 0 } to { height: var(--radix-accordion-content-height) } }
+@keyframes accordion-up { from { height: var(--radix-accordion-content-height) } to { height: 0 } }
+@keyframes breathing { 0%, 100% { box-shadow: 0 0 15px -5px hsl(var(--brand-primary) / 0.3) } 50% { box-shadow: 0 0 25px -5px hsl(var(--brand-primary) / 0.5) } }
+@keyframes pulse-brand { 0%, 100% { box-shadow: 0 0 15px -5px hsl(var(--brand-primary) / 0.3) } 50% { box-shadow: 0 0 25px -5px hsl(var(--brand-primary) / 0.5) } }
+@keyframes ai-pulse { 0%, 100% { opacity: 1 } 50% { opacity: 0.5 } }
+
+/* ── togo kit root helper (used by Storybook canvas + optional app wrapper) ── */
+:root { --tg-font: "Lusail", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+.tg-root { font-family: var(--tg-font); }
+/* RTL: components use logical properties (ps/pe/ms/me/start/end) and flip under [dir="rtl"]. */
+
+/* ── highlight.js theme (token-driven; works in dark & light) ──
+   Scoped to both the markdown renderer (.tg-md) and the standalone CodeBlock (.tg-code). */
+:where(.tg-md, .tg-code) .hljs { color: hsl(var(--foreground)); }
+:where(.tg-md, .tg-code) .hljs-comment, :where(.tg-md, .tg-code) .hljs-quote { color: hsl(var(--muted-foreground)); font-style: italic; }
+:where(.tg-md, .tg-code) .hljs-keyword, :where(.tg-md, .tg-code) .hljs-selector-tag, :where(.tg-md, .tg-code) .hljs-built_in, :where(.tg-md, .tg-code) .hljs-name, :where(.tg-md, .tg-code) .hljs-tag { color: hsl(var(--primary)); }
+:where(.tg-md, .tg-code) .hljs-string, :where(.tg-md, .tg-code) .hljs-title, :where(.tg-md, .tg-code) .hljs-section, :where(.tg-md, .tg-code) .hljs-attribute, :where(.tg-md, .tg-code) .hljs-literal, :where(.tg-md, .tg-code) .hljs-template-tag, :where(.tg-md, .tg-code) .hljs-template-variable, :where(.tg-md, .tg-code) .hljs-type, :where(.tg-md, .tg-code) .hljs-addition { color: hsl(var(--success)); }
+:where(.tg-md, .tg-code) .hljs-number, :where(.tg-md, .tg-code) .hljs-symbol, :where(.tg-md, .tg-code) .hljs-bullet, :where(.tg-md, .tg-code) .hljs-link, :where(.tg-md, .tg-code) .hljs-meta, :where(.tg-md, .tg-code) .hljs-selector-id, :where(.tg-md, .tg-code) .hljs-selector-class { color: hsl(var(--info)); }
+:where(.tg-md, .tg-code) .hljs-attr, :where(.tg-md, .tg-code) .hljs-variable, :where(.tg-md, .tg-code) .hljs-params { color: hsl(var(--warning)); }
+:where(.tg-md, .tg-code) .hljs-deletion { color: hsl(var(--destructive)); }
+:where(.tg-md, .tg-code) .hljs-emphasis { font-style: italic; }
+:where(.tg-md, .tg-code) .hljs-strong { font-weight: 700; }
+
+/* ════════════════════════════════════════════════════════════════════════════
+ * ToGO BRAND REMAP — re-point the inherited (prism) HSL tokens onto the ToGO
+ * palette so the entire kit + every app re-skins to the brand. Appended last so
+ * it wins by cascade without editing the blocks above. [data-theme] selectors are
+ * added alongside .dark so ThemeProvider can drive these tokens too.
+ * HSL triples here are the ToGO hex palette converted for the hsl(var(--x)) system.
+ * ════════════════════════════════════════════════════════════════════════════ */
+
+/* Light (default + explicit) — accent = Cobalt, focus = Stack Sky, surfaces = Mist */
+:root,
+[data-theme="light"] {
+  --background: 195 21% 96%;          /* Mist  #F4F7F8 */
+  --background-medium: 200 16% 92%;
+  --foreground: 200 18% 10%;          /* Ink   #141A1D */
+  --card: 0 0% 100%;
+  --card-foreground: 200 18% 10%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 200 18% 10%;
+  --primary: 217 80% 44%;             /* Cobalt #1659C8 */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 200 16% 93%;
+  --secondary-foreground: 200 18% 12%;
+  --muted: 200 16% 93%;
+  --muted-foreground: 198 12% 40%;    /* Slate #5A6B72 */
+  --accent: 200 18% 90%;
+  --accent-foreground: 200 18% 12%;
+  --border: 200 14% 88%;              /* Line  #E8EDEF */
+  --input: 200 14% 88%;
+  --ring: 209 79% 54%;                /* Stack Sky #2D8CE6 */
+  --brand-primary: 217 80% 44%;
+  --brand-primary-glow: 209 79% 54%;
+  --ai-glow: 217 80% 44%;
+  --ai-pulse: 187 75% 49%;
+  --sidebar-background: 0 0% 100%;
+  --sidebar-foreground: 198 12% 40%;
+  --sidebar-primary: 217 80% 44%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 200 18% 95%;
+  --sidebar-accent-foreground: 200 18% 12%;
+  --sidebar-border: 200 14% 90%;
+  --sidebar-ring: 209 79% 54%;
+  --success: 157 67% 37%;             /* #1F9D6B */
+  --warning: 40 80% 49%;              /* #E0A11B */
+  --destructive: 353 62% 59%;         /* Danger #D85563 */
+  --info: 209 79% 54%;
+}
+
+/* Dark (default-when-.dark + explicit) — accent = Gopher Cyan on Ink */
+.dark,
+[data-theme="dark"] {
+  --background: 200 20% 7%;           /* near-Ink */
+  --background-medium: 200 16% 11%;
+  --foreground: 200 15% 96%;
+  --card: 200 18% 11%;
+  --card-foreground: 200 15% 96%;
+  --popover: 200 18% 13%;
+  --popover-foreground: 200 15% 96%;
+  --primary: 187 75% 49%;             /* Gopher Cyan #1FC7DC */
+  --primary-foreground: 200 18% 10%;  /* Ink text on cyan */
+  --secondary: 200 14% 17%;
+  --secondary-foreground: 200 15% 96%;
+  --muted: 200 14% 17%;
+  --muted-foreground: 200 11% 68%;    /* Slate-300 */
+  --accent: 200 14% 20%;
+  --accent-foreground: 200 15% 96%;
+  --border: 200 14% 20%;
+  --input: 200 14% 20%;
+  --ring: 187 75% 55%;
+  --brand-primary: 187 75% 49%;
+  --brand-primary-glow: 209 79% 54%;
+  --ai-glow: 187 75% 49%;
+  --ai-pulse: 187 60% 60%;
+  --sidebar-background: 200 20% 9%;
+  --sidebar-foreground: 200 11% 68%;
+  --sidebar-primary: 187 75% 49%;
+  --sidebar-primary-foreground: 200 18% 10%;
+  --sidebar-accent: 200 14% 16%;
+  --sidebar-accent-foreground: 200 15% 96%;
+  --sidebar-border: 200 14% 18%;
+  --sidebar-ring: 187 75% 55%;
+  --success: 157 60% 45%;
+  --warning: 40 80% 55%;
+  --destructive: 353 62% 59%;
+  --info: 209 79% 60%;
+}
+
+/* Themed variants (purple/rose/emerald + light) — remap the shadcn tokens the
+ * components actually use (--primary/--background/--border/…) so EVERY theme
+ * re-skins the whole kit, not just light/dark. Generated from tokens.semantic.css. */
+[data-theme="purple"] {
+  --background: 266 30% 9%;
+  --background-medium: 266 28% 15%;
+  --foreground: 257 47% 94%;
+  --card: 265 31% 12%;
+  --card-foreground: 257 47% 94%;
+  --popover: 266 28% 15%;
+  --popover-foreground: 257 47% 94%;
+  --primary: 260 87% 69%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 266 28% 15%;
+  --secondary-foreground: 257 47% 94%;
+  --muted: 266 28% 15%;
+  --muted-foreground: 256 31% 66%;
+  --accent: 266 28% 15%;
+  --accent-foreground: 257 47% 94%;
+  --border: 265 33% 22%;
+  --input: 265 33% 22%;
+  --ring: 260 87% 69%;
+  --brand-primary: 260 87% 69%;
+  --brand-primary-glow: 260 100% 78%;
+  --ai-glow: 260 87% 69%;
+  --ai-pulse: 260 100% 78%;
+  --sidebar-background: 265 31% 12%;
+  --sidebar-foreground: 256 31% 66%;
+  --sidebar-primary: 260 87% 69%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 266 28% 15%;
+  --sidebar-accent-foreground: 257 47% 94%;
+  --sidebar-border: 265 33% 22%;
+  --sidebar-ring: 260 87% 69%;
+  --success: 157 60% 45%;
+  --warning: 40 80% 55%;
+  --destructive: 353 62% 59%;
+  --info: 209 79% 60%;
+}
+
+[data-theme="rose"] {
+  --background: 339 30% 9%;
+  --background-medium: 322 25% 15%;
+  --foreground: 347 47% 94%;
+  --card: 325 28% 12%;
+  --card-foreground: 347 47% 94%;
+  --popover: 322 25% 15%;
+  --popover-foreground: 347 47% 94%;
+  --primary: 341 90% 61%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 322 25% 15%;
+  --secondary-foreground: 347 47% 94%;
+  --muted: 322 25% 15%;
+  --muted-foreground: 341 31% 66%;
+  --accent: 322 25% 15%;
+  --accent-foreground: 347 47% 94%;
+  --border: 330 37% 21%;
+  --input: 330 37% 21%;
+  --ring: 341 90% 61%;
+  --brand-primary: 341 90% 61%;
+  --brand-primary-glow: 340 100% 71%;
+  --ai-glow: 341 90% 61%;
+  --ai-pulse: 340 100% 71%;
+  --sidebar-background: 325 28% 12%;
+  --sidebar-foreground: 341 31% 66%;
+  --sidebar-primary: 341 90% 61%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 322 25% 15%;
+  --sidebar-accent-foreground: 347 47% 94%;
+  --sidebar-border: 330 37% 21%;
+  --sidebar-ring: 341 90% 61%;
+  --success: 157 60% 45%;
+  --warning: 40 80% 55%;
+  --destructive: 353 62% 59%;
+  --info: 209 79% 60%;
+}
+
+[data-theme="emerald"] {
+  --background: 165 30% 8%;
+  --background-medium: 152 25% 14%;
+  --foreground: 160 35% 93%;
+  --card: 143 25% 10%;
+  --card-foreground: 160 35% 93%;
+  --popover: 152 25% 14%;
+  --popover-foreground: 160 35% 93%;
+  --primary: 160 84% 39%;
+  --primary-foreground: 165 30% 8%;
+  --secondary: 152 25% 14%;
+  --secondary-foreground: 160 35% 93%;
+  --muted: 152 25% 14%;
+  --muted-foreground: 153 23% 63%;
+  --accent: 152 25% 14%;
+  --accent-foreground: 160 35% 93%;
+  --border: 149 26% 19%;
+  --input: 149 26% 19%;
+  --ring: 160 84% 39%;
+  --brand-primary: 160 84% 39%;
+  --brand-primary-glow: 158 64% 52%;
+  --ai-glow: 160 84% 39%;
+  --ai-pulse: 158 64% 52%;
+  --sidebar-background: 143 25% 10%;
+  --sidebar-foreground: 153 23% 63%;
+  --sidebar-primary: 160 84% 39%;
+  --sidebar-primary-foreground: 165 30% 8%;
+  --sidebar-accent: 152 25% 14%;
+  --sidebar-accent-foreground: 160 35% 93%;
+  --sidebar-border: 149 26% 19%;
+  --sidebar-ring: 160 84% 39%;
+  --success: 157 60% 45%;
+  --warning: 40 80% 55%;
+  --destructive: 353 62% 59%;
+  --info: 209 79% 60%;
+}
+
+[data-theme="purple-light"] {
+  --background: 250 100% 99%;
+  --background-medium: 253 88% 97%;
+  --foreground: 258 56% 23%;
+  --card: 0 0% 100%;
+  --card-foreground: 258 56% 23%;
+  --popover: 253 88% 97%;
+  --popover-foreground: 258 56% 23%;
+  --primary: 262 83% 58%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 253 88% 97%;
+  --secondary-foreground: 258 56% 23%;
+  --muted: 253 88% 97%;
+  --muted-foreground: 253 25% 50%;
+  --accent: 253 88% 97%;
+  --accent-foreground: 258 56% 23%;
+  --border: 251 95% 92%;
+  --input: 251 95% 92%;
+  --ring: 262 83% 58%;
+  --brand-primary: 262 83% 58%;
+  --brand-primary-glow: 263 70% 50%;
+  --ai-glow: 262 83% 58%;
+  --ai-pulse: 263 70% 50%;
+  --sidebar-background: 0 0% 100%;
+  --sidebar-foreground: 253 25% 50%;
+  --sidebar-primary: 262 83% 58%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 253 88% 97%;
+  --sidebar-accent-foreground: 258 56% 23%;
+  --sidebar-border: 251 95% 92%;
+  --sidebar-ring: 262 83% 58%;
+  --success: 157 67% 37%;
+  --warning: 40 80% 49%;
+  --destructive: 353 62% 59%;
+  --info: 209 79% 54%;
+}
+
+[data-theme="rose-light"] {
+  --background: 351 100% 99%;
+  --background-medium: 347 88% 97%;
+  --foreground: 343 88% 16%;
+  --card: 0 0% 100%;
+  --card-foreground: 343 88% 16%;
+  --popover: 347 88% 97%;
+  --popover-foreground: 343 88% 16%;
+  --primary: 347 77% 50%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 347 88% 97%;
+  --secondary-foreground: 343 88% 16%;
+  --muted: 347 88% 97%;
+  --muted-foreground: 340 43% 44%;
+  --accent: 347 88% 97%;
+  --accent-foreground: 343 88% 16%;
+  --border: 353 96% 90%;
+  --input: 353 96% 90%;
+  --ring: 347 77% 50%;
+  --brand-primary: 347 77% 50%;
+  --brand-primary-glow: 345 83% 41%;
+  --ai-glow: 347 77% 50%;
+  --ai-pulse: 345 83% 41%;
+  --sidebar-background: 0 0% 100%;
+  --sidebar-foreground: 340 43% 44%;
+  --sidebar-primary: 347 77% 50%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 347 88% 97%;
+  --sidebar-accent-foreground: 343 88% 16%;
+  --sidebar-border: 353 96% 90%;
+  --sidebar-ring: 347 77% 50%;
+  --success: 157 67% 37%;
+  --warning: 40 80% 49%;
+  --destructive: 353 62% 59%;
+  --info: 209 79% 54%;
+}
+
+[data-theme="emerald-light"] {
+  --background: 138 76% 97%;
+  --background-medium: 141 84% 93%;
+  --foreground: 145 80% 10%;
+  --card: 0 0% 100%;
+  --card-foreground: 145 80% 10%;
+  --popover: 141 84% 93%;
+  --popover-foreground: 145 80% 10%;
+  --primary: 161 94% 30%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 141 84% 93%;
+  --secondary-foreground: 145 80% 10%;
+  --muted: 141 84% 93%;
+  --muted-foreground: 143 64% 24%;
+  --accent: 141 84% 93%;
+  --accent-foreground: 145 80% 10%;
+  --border: 141 79% 85%;
+  --input: 141 79% 85%;
+  --ring: 161 94% 30%;
+  --brand-primary: 161 94% 30%;
+  --brand-primary-glow: 163 94% 24%;
+  --ai-glow: 161 94% 30%;
+  --ai-pulse: 163 94% 24%;
+  --sidebar-background: 0 0% 100%;
+  --sidebar-foreground: 143 64% 24%;
+  --sidebar-primary: 161 94% 30%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 141 84% 93%;
+  --sidebar-accent-foreground: 145 80% 10%;
+  --sidebar-border: 141 79% 85%;
+  --sidebar-ring: 161 94% 30%;
+  --success: 157 67% 37%;
+  --warning: 40 80% 49%;
+  --destructive: 353 62% 59%;
+  --info: 209 79% 54%;
+}
+
+/* New ToGO Tailwind aliases for the §2 authoring API (non-conflicting names).
+ * The brand accent is also available as `bg-primary` (remapped above). */
+@theme inline {
+  --color-surface: var(--togo-color-surface);
+  --color-surface-alt: var(--togo-color-surface-alt);
+  --color-on-accent: var(--togo-color-on-accent);
+  --color-accent-strong: var(--togo-color-accent-strong);
+  --color-danger: var(--togo-color-danger);
+  --color-warn: var(--togo-color-warn);
+  --font-display: var(--togo-font-display);
+  --font-mono: var(--togo-font-mono);
+  --font-sans: var(--togo-font-body);
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+ * ToGO brand fonts — self-hosted (OFL), variable woff2. Latin display/body/mono;
+ * Lusail stays the Arabic face. Consumers serve /fonts/** from their public dir
+ * (same model as Lusail). Making IBM Plex Sans the default Latin UI font fixes the
+ * top-aligned-glyph issue Lusail caused (its tall ascent pushed Latin text up in
+ * the line box) — IBM Plex has normal vertical metrics so text centers.
+ * ════════════════════════════════════════════════════════════════════════════ */
+@font-face { font-family: "Sora";          src: url("/fonts/sora/sora.woff2") format("woff2");                       font-weight: 100 800; font-style: normal; font-display: swap; }
+@font-face { font-family: "IBM Plex Sans";  src: url("/fonts/ibm-plex-sans/ibm-plex-sans.woff2") format("woff2");     font-weight: 100 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "JetBrains Mono"; src: url("/fonts/jetbrains-mono/jetbrains-mono.woff2") format("woff2");   font-weight: 100 800; font-style: normal; font-display: swap; }
+
+:root { --tg-font: var(--togo-font-body); }
+.tg-root { font-family: var(--togo-font-body); }
+/* Arabic / RTL renders in the Lusail brand face. */
+[dir="rtl"], :lang(ar) { font-family: "Lusail", var(--togo-font-body); }
+
+/* Hide scrollbars but keep scrolling (used by the OS Dock's overflow-x on mobile). */
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
